@@ -57,7 +57,7 @@ namespace ValueEnumerable
 
             public bool MoveNext()
             {
-                _index++;
+                checked { _index++; }
                 return _enumerator.MoveNext();
             }
 
