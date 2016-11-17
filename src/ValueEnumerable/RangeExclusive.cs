@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace ValueEnumerable
@@ -27,34 +28,26 @@ namespace ValueEnumerable
 
         public struct Enumerator : IEnumerator<int>
         {
-            private readonly int _start;
             private readonly int _end;
             private int _current;
 
             internal Enumerator(int start, int end)
             {
-                _start = start;
                 _end = end;
-                _current = start;
+                _current = start - 1;
             }
 
-            public int Current => _current - 1;
+            public int Current => _current;
             object IEnumerator.Current => this.Current;
 
             public bool MoveNext()
             {
-                if (_current < _end)
-                {
-                    _current++;
-                    return true;
-                }
-
-                return false;
+                return ++_current < _end;
             }
 
             public void Reset()
             {
-                _current = _start;
+                throw new NotSupportedException();
             }
 
             public void Dispose() { }

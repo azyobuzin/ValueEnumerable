@@ -37,14 +37,12 @@ namespace ValueEnumerable
 
         public struct Enumerator : IEnumerator<int>
         {
-            private readonly int _start;
             private readonly int _end;
             private int _current;
             private bool _isFinished;
 
             internal Enumerator(int start, int end)
             {
-                _start = start;
                 _end = end;
                 _current = start - 1;
                 _isFinished = start > end;
@@ -63,8 +61,7 @@ namespace ValueEnumerable
 
             public void Reset()
             {
-                _current = _start - 1;
-                _isFinished = _start > _end;
+                throw new NotSupportedException();
             }
 
             public void Dispose() { }
