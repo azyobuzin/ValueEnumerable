@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 namespace ValueEnumerable
 {
     partial class ValueEnumerableExtensions
     {
-        public struct IndexedListEnumerable<T> : IReadOnlyList<ValueTuple<T, int>>
+        public struct IndexedListEnumerable<T> : IReadOnlyList<(T item, int index)>
         {
             private readonly IReadOnlyList<T> _list;
 
@@ -21,25 +19,16 @@ namespace ValueEnumerable
                 return new IndexedListEnumerator<T>(_list);
             }
 
-            [return: TupleElementNames(new[] { "item", "index" })]
-            IEnumerator<ValueTuple<T, int>> IEnumerable<ValueTuple<T, int>>.GetEnumerator() => this.GetEnumerator();
+            IEnumerator<(T item, int index)> IEnumerable<(T item, int index)>.GetEnumerator() => this.GetEnumerator();
 
             IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
 
             public int Count => _list.Count;
 
-            [TupleElementNames(new[] { "item", "index" })]
-            public ValueTuple<T, int> this[int index]
-            {
-                [return: TupleElementNames(new[] { "item", "index" })]
-                get
-                {
-                    return ValueTuple.Create(_list[index], index);
-                }
-            }
+            public (T item, int index) this[int index] => (_list[index], index);
         }
 
-        public struct IndexedListEnumerator<T> : IEnumerator<ValueTuple<T, int>>
+        public struct IndexedListEnumerator<T> : IEnumerator<(T item, int index)>
         {
             private readonly IReadOnlyList<T> _list;
             private int _index;
@@ -50,15 +39,7 @@ namespace ValueEnumerable
                 _index = -1;
             }
 
-            [TupleElementNames(new[] { "item", "index" })]
-            public ValueTuple<T, int> Current
-            {
-                [return: TupleElementNames(new[] { "item", "index" })]
-                get
-                {
-                    return ValueTuple.Create(_list[_index], _index);
-                }
-            }
+            public (T item, int index) Current => (_list[_index], _index);
 
             object IEnumerator.Current => this.Current;
 

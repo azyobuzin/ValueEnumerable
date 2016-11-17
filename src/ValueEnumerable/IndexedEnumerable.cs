@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 namespace ValueEnumerable
 {
     partial class ValueEnumerableExtensions
     {
-        public struct IndexedEnumerable<T> : IEnumerable<ValueTuple<T, int>>
+        public struct IndexedEnumerable<T> : IEnumerable<(T item, int index)>
         {
             private readonly IEnumerable<T> _enumerable;
 
@@ -21,13 +19,12 @@ namespace ValueEnumerable
                 return new IndexedEnumerator<T>(_enumerable.GetEnumerator());
             }
 
-            [return: TupleElementNames(new[] { "item", "index" })]
-            IEnumerator<ValueTuple<T, int>> IEnumerable<ValueTuple<T, int>>.GetEnumerator() => this.GetEnumerator();
+            IEnumerator<(T item, int index)> IEnumerable<(T item, int index)>.GetEnumerator() => this.GetEnumerator();
 
             IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
         }
 
-        public struct IndexedEnumerator<T> : IEnumerator<ValueTuple<T, int>>
+        public struct IndexedEnumerator<T> : IEnumerator<(T item, int index)>
         {
             private readonly IEnumerator<T> _enumerator;
             private int _index;
@@ -38,15 +35,7 @@ namespace ValueEnumerable
                 _index = -1;
             }
 
-            [TupleElementNames(new[] { "item", "index" })]
-            public ValueTuple<T, int> Current
-            {
-                [return: TupleElementNames(new[] { "item", "index" })]
-                get
-                {
-                    return ValueTuple.Create(_enumerator.Current, _index);
-                }
-            }
+            public (T item, int index) Current => (_enumerator.Current, _index);
 
             object IEnumerator.Current => this.Current;
 

@@ -8,12 +8,10 @@ namespace ValueEnumerable.Tests
         [Fact]
         public void BasicTest()
         {
-            foreach (var x in Enumerable.Range(0, 10).Indexed())
+            foreach ((var x, var i) in Enumerable.Range(0, 10).Indexed())
             {
-                Assert.Equal(x.Item2, x.Item1);
+                Assert.Equal(x, i);
             }
         }
-
-        // TODO: Test the compatibility with C# 7 Tuple syntax
     }
 }
