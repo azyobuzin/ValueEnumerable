@@ -8,7 +8,7 @@
     <Copyright>©2016 @azyobuzin, @ufcpp</Copyright>
     <PackageLicenseUrl>https://github.com/azyobuzin/ValueEnumerable/blob/master/LICENSE.txt</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/azyobuzin/ValueEnumerable</PackageProjectUrl>
-    <ProjectTags>range</ProjectTags>
+    <PackageTags>range</PackageTags>
     <RepositoryUrl>https://github.com/azyobuzin/ValueEnumerable.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
