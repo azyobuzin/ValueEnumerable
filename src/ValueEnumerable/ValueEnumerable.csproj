@@ -3,6 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.0</TargetFramework>
     <AssemblyName>ValueEnumerable</AssemblyName>
+    <Authors>azyobuzin;ufcpp</Authors>
+    <Description>Now is the time to destroy `for` statement and use `foreach`.</Description>
+    <Copyright>©2016 @azyobuzin, @ufcpp</Copyright>
+    <PackageLicenseUrl>https://github.com/azyobuzin/ValueEnumerable/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/azyobuzin/ValueEnumerable</PackageProjectUrl>
+    <ProjectTags>range</ProjectTags>
+    <RepositoryUrl>https://github.com/azyobuzin/ValueEnumerable.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="**\*.cs" />
